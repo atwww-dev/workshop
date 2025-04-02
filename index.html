@@ -1,1 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery Workshop | ATWWW</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0e0e0e;
+      --bg-darker: #080808;
+      --bg-card: #121212;
+      --text-primary: #ffffff;
+      --text-secondary: #999999;
+      --text-tertiary: #666666;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-color: rgba(255, 255, 255, 0.2);
+      --highlight: #ffffff;
+      --badge-bg: rgba(255, 255, 255, 0.05);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    header {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    
+    .tagline {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-align: center;
+      letter-spacing: 2px;
+    }
+    
+    .hero {
+      padding: 120px 0 80px;
+      text-align: left;
+      background-color: var(--bg-darker);
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
+      margin-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.03) 75%, transparent 75%, transparent);
+      background-size: 100px 100px;
+      opacity: 0.3;
+      z-index: 1;
+    }
+    
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-title {
+      font-size: 48px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+    
+    .section {
+      margin-bottom: 80px;
+    }
+    
+    h2 {
+      font-size: 32px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      margin-bottom: 32px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--accent-color);
+    }
+    
+    h3 {
+      font-size: 24px;
+      font-weight: 300;
+      letter-spacing: 1.5px;
+      margin: 32px 0 24px;
+      color: var(--highlight);
+    }
+    
+    h4 {
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      margin: 24px 0 16px;
+      color: var(--text-primary);
+    }
+    
+    p {
+      margin-bottom: 16px;
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+    
+    ul, ol {
+      margin: 16px 0 24px 24px;
+      color: var(--text-secondary);
+    }
+    
+    li {
+      margin-bottom: 8px;
+    }
+    
+    .card {
+      background-color: var(--bg-card);
+      border: 1px dashed var(--border-color);
+      padding: 32px;
+      margin-bottom: 32px;
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+    }
+    
+    .accent-card {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+    
+    .card-title {
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 16px;
+      color: var(--highlight);
+    }
+    
+    .workshop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin: 32px 0;
+    }
+    
+    .phase {
+      position: relative;
+      margin-bottom: 32px;
+      padding-left: 24px;
+    }
+    
+    .phase::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      background-color: var(--highlight);
+    }
+    
+    .phase-number {
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      letter-spacing: 1.5px;
+    }
+    
+    .phase-title {
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    
+    .note {
+      padding: 24px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border-left: 2px solid var(--highlight);
+      margin: 32px 0;
+    }
+    
+    .important-note {
+      padding: 24px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-left: 2px solid var(--highlight);
+      margin: 32px 0;
+      position: relative;
+    }
+    
+    .important-note::before {
+      content: 'IMPORTANT';
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      background-color: var(--bg-dark);
+      padding: 0 8px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--highlight);
+    }
+    
+    .payment-terms {
+      margin-top: 40px;
+    }
+    
+    .price {
+      font-size: 40px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      color: var(--highlight);
+      margin: 32px 0;
+      display: inline-block;
+      position: relative;
+    }
+    
+    .price::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 1px;
+      background-color: var(--accent-color);
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 2px;
+      background-color: var(--badge-bg);
+      color: var(--text-secondary);
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    
+    .timeline {
+      margin: 32px 0;
+    }
+    
+    .timeline-item {
+      margin-bottom: 24px;
+      position: relative;
+      padding-left: 32px;
+    }
+    
+    .timeline-item:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      background-color: var(--highlight);
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%);
+    }
+    
+    .timeline-item:after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 24px;
+      bottom: -16px;
+      width: 1px;
+      background-color: var(--accent-color);
+    }
+    
+    .timeline-item:last-child:after {
+      display: none;
+    }
+    
+    .timeline-title {
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      color: var(--highlight);
+    }
+    
+    .highlight-box {
+      display: flex;
+      align-items: center;
+      margin: 40px 0;
+    }
+    
+    .highlight-number {
+      font-size: 60px;
+      font-weight: 300;
+      color: var(--highlight);
+      margin-right: 24px;
+      opacity: 0.5;
+      line-height: 1;
+    }
+    
+    .highlight-text {
+      flex: 1;
+      color: var(--text-secondary);
+    }
+    
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+    
+    .copyright {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      letter-spacing: 1.5px;
+    }
+    
+    @media (max-width: 768px) {
+      .workshop-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-title {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">ATWWW</div>
+      <div class="tagline">THE ARTISAN OF TOMORROW</div>
+    </div>
+  </header>
 
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">Project Discovery Workshop</h1>
+      <p class="hero-subtitle">A structured process to define the purpose, goals, timeline, and budget of your digital project.</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="section">
+      <h2>Workshop Overview</h2>
+      <div class="card">
+        <p>The Project Discovery Workshop is a collaborative session designed to establish clear project parameters and strategic direction. It creates alignment between stakeholders and the development team while reducing risks and ensuring efficient resource allocation.</p>
+        
+        <div class="highlight-box">
+          <div class="highlight-number">2</div>
+          <div class="highlight-text">
+            <p>Hour intensive workshop covering all aspects of your project requirements, from brand identity to technical specifications and project planning.</p>
+          </div>
+        </div>
+        
+        <div class="price">$300</div>
+        
+        <div class="payment-terms">
+          <div class="badge">PAYMENT TERMS</div>
+          <p>The $300 workshop fee must be paid upfront to secure your session. Following payment, our team will schedule your workshop within 7 business days.</p>
+          <p>This payment covers all pre-workshop preparation, the 2-hour facilitated session, and post-workshop deliverables.</p>
+        </div>
+      </div>
+      
+      <div class="important-note">
+        <p>The $300 workshop fee is credited toward your project upon signing a service agreement. This credit is applied to your first invoice when proceeding with ATWWW as your development partner.</p>
+      </div>
+    </section>
+    
+    <section class="section">
+      <h2>Workshop Structure</h2>
+      
+      <div class="phase">
+        <span class="phase-number">PHASE 01</span>
+        <h3 class="phase-title">Identity & Audience</h3>
+        <div class="card">
+          <ul>
+            <li>Who are you?</li>
+            <li>Target audience - user intent</li>
+            <li>Current online presence</li>
+            <li>Existing client base</li>
+            <li>Market timing</li>
+            <li>Competitive differentiation</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="phase">
+        <span class="phase-number">PHASE 02</span>
+        <h3 class="phase-title">Design & Brand</h3>
+        <div class="card">
+          <ul>
+            <li>Brand identity overview</li>
+            <li>Color palettes & typography</li>
+            <li>UI animation concepts</li>
+            <li>Design inspiration & reference</li>
+            <li>Preliminary site mapping</li>
+            <li>User journey exploration</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="phase">
+        <span class="phase-number">PHASE 03</span>
+        <h3 class="phase-title">Technical Requirements</h3>
+        <div class="card">
+          <ul>
+            <li>Platform selection</li>
+            <li>Technology stack assessment</li>
+            <li>Third-party integrations</li>
+            <li>Performance requirements</li>
+            <li>Security considerations</li>
+            <li>Scalability planning</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="phase">
+        <span class="phase-number">PHASE 04</span>
+        <h3 class="phase-title">Project Planning</h3>
+        <div class="card">
+          <ul>
+            <li>Timeline development</li>
+            <li>Resource allocation</li>
+            <li>Budget considerations</li>
+            <li>Milestone definition</li>
+            <li>Risk assessment</li>
+            <li>Success metrics</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <h2>Deliverables</h2>
+      <div class="card">
+        <h4>Following the workshop, you will receive:</h4>
+        <ul>
+          <li>Comprehensive workshop documentation</li>
+          <li>Strategic project brief</li>
+          <li>Technical specification outline</li>
+          <li>Project timeline roadmap</li>
+          <li>Budget framework</li>
+        </ul>
+      </div>
+      
+      <div class="card accent-card">
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4 class="timeline-title">STEP 1: PAYMENT</h4>
+            <p>Submit the upfront $300 workshop fee to secure your slot</p>
+          </div>
+          
+          <div class="timeline-item">
+            <h4 class="timeline-title">STEP 2: SCHEDULING</h4>
+            <p>We'll coordinate a date and time for your 2-hour workshop session</p>
+          </div>
+          
+          <div class="timeline-item">
+            <h4 class="timeline-title">STEP 3: WORKSHOP</h4>
+            <p>Participate in the collaborative 2-hour discovery session</p>
+          </div>
+          
+          <div class="timeline-item">
+            <h4 class="timeline-title">STEP 4: DELIVERABLES</h4>
+            <p>Receive your comprehensive documentation within 5 business days</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="container">
+      <p class="copyright">© 2024 ATWWW. ALL RIGHTS RESERVED.</p>
+    </div>
+  </footer>
+</body>
+</html> 
